@@ -1,9 +1,7 @@
-import collections
 from numpy import random
-
 import numpy as np
 import tensorflow as tf
-import tensorflow_federated as tff
+
 
 mnist_train, mnist_test = tf.keras.datasets.mnist.load_data()
 
