@@ -19,14 +19,22 @@ def load(num, batch_size = BATCH_SIZE):
     test_data = __format_data(num//10, batch_size, mnist_test)
     return train_data, test_data
 
+
 def __format_data(num, batch_size, source):
+    """
+    从数据集source中随机抽取num个数的数据样本进行打包，每个batch的大小为batch_size
+    :param num:指定抽取数据的个数
+    :param batch_size:每个batch的大小
+    :param source:源数据集
+    :return: output_sequence:生成的数据集
+    """
     all_samples = []
     output_sequence = []
     for _ in range(num):
         f = random.randint(0, len(source[0]))
         all_samples.append(f)
-    for i in range(0, min(len(all_samples), NUM_EXAMPLES_PER_USER), BATCH_SIZE):
-        batch_samples = all_samples[i:i + BATCH_SIZE]
+    for i in range(0, min(len(all_samples), NUM_EXAMPLES_PER_USER), batch_size):
+        batch_samples = all_samples[i:i + batch_size]
         output_sequence.append({
             'x':
                 np.array([source[0][i].flatten() / 255.0 for i in batch_samples],
